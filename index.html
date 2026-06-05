@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K뷰티 해외영업 비즈니스 영어 학습 계획표</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #faf8f5;
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+      color: #1a1a1a;
+      font-size: 14px;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #1a1a1a;
+      padding: 28px 32px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .header-eyebrow {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .header-title {
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .tab-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+      font-weight: 400;
+      border: 1px solid #333;
+      background: transparent;
+      color: #888;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: #1a1a1a;
+      border-color: #fff;
+      font-weight: 600;
+    }
+
+    /* Phase tabs */
+    .phase-tabs {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      padding-bottom: 0;
+    }
+    .phase-btn {
+      padding: 10px 16px;
+      background: transparent;
+      color: #555;
+      border: none;
+      cursor: pointer;
+      font-size: 11px;
+      font-family: inherit;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .phase-btn.active {
+      border-bottom-color: var(--phase-color);
+      background: color-mix(in srgb, var(--phase-color) 15%, transparent);
+      color: #fff;
+    }
+
+    /* ── Main content ── */
+    .content { padding: 32px; }
+
+    /* Phase header card */
+    .phase-header {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      border-left: 5px solid var(--phase-color);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .phase-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--phase-color);
+    }
+    .phase-title { font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; margin-bottom: 4px; }
+    .phase-subtitle { font-size: 13px; color: #888; }
+    .phase-days {
+      background: color-mix(in srgb, var(--phase-color) 20%, transparent);
+      border: 1px solid color-mix(in srgb, var(--phase-color) 40%, transparent);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--phase-color);
+      white-space: nowrap;
+    }
+
+    /* Accordion block */
+    .accordion { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .accordion-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .accordion-btn {
+      width: 100%;
+      padding: 16px 20px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.15s;
+    }
+    .accordion-btn:hover { background: #f5f5f5; }
+    .accordion-btn.open { background: color-mix(in srgb, var(--block-color) 10%, #fff); }
+    .accordion-btn-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+    .accordion-icon { font-size: 22px; font-weight: 300; line-height: 1; color: var(--block-color); }
+
+    .accordion-body { padding: 0 20px 20px; display: none; }
+    .accordion-body.open { display: block; }
+
+    .item-card {
+      margin-top: 12px;
+      background: #faf8f5;
+      border-radius: 8px;
+      padding: 16px;
+      border-left: 3px solid var(--block-color);
+    }
+    .item-task { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #1a1a1a; }
+    .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .item-grid { grid-template-columns: 1fr; } }
+    .item-label {
+      font-size: 10px;
+      color: #999;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .item-how { font-size: 12px; color: #555; line-height: 1.7; white-space: pre-line; }
+    .item-output {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--block-color) 20%, transparent);
+      color: var(--block-color);
+    }
+
+    /* Feedback loop bar */
+    .feedback-bar {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .feedback-label { font-size: 12px; color: #fff; font-weight: 600; }
+    .feedback-step { font-size: 12px; font-weight: 600; }
+    .feedback-arrow { font-size: 12px; color: #555; }
+
+    /* ── Resources tab ── */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .resource-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border-top: 4px solid var(--res-color);
+    }
+    .resource-category {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: var(--res-color);
+    }
+    .resource-item { padding: 10px 0; border-bottom: 1px solid #f0ece8; }
+    .resource-item:last-child { border-bottom: none; }
+    .resource-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .resource-desc { font-size: 11px; color: #888; margin-bottom: 3px; }
+    .resource-url { font-size: 10px; color: #bbb; }
+
+    .steps-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .steps-title { font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .step-card {
+      border-radius: 8px;
+      padding: 14px;
+      border-left: 3px solid var(--step-color);
+      background: color-mix(in srgb, var(--step-color) 10%, transparent);
+    }
+    .step-num { font-size: 10px; font-weight: 700; margin-bottom: 5px; color: var(--step-color); }
+    .step-title-txt { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .step-desc { font-size: 11px; color: #666; line-height: 1.6; white-space: pre-line; }
+
+    /* ── Routine tab ── */
+    .routine-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .routine-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border-top: 4px solid var(--r-color);
+    }
+    .routine-time { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; color: var(--r-color); }
+    .routine-lbl { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .routine-content { font-size: 12px; color: #666; line-height: 1.6; }
+
+    .warning-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .warning-title { font-size: 13px; font-weight: 700; color: #FF6B6B; margin-bottom: 12px; }
+    .warning-body { font-size: 13px; color: #ccc; line-height: 1.8; }
+    .warning-body em { color: #fff; font-style: normal; font-weight: 600; }
+    .warning-body strong { color: #4ECDC4; font-weight: 600; }
+
+    .roadmap-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .roadmap-title { font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+    .roadmap-row { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+    .roadmap-step {
+      flex: 1;
+      min-width: 110px;
+      border-radius: 8px;
+      padding: 14px;
+      border-left: 3px solid var(--rm-color);
+      background: color-mix(in srgb, var(--rm-color) 12%, transparent);
+      margin: 4px;
+    }
+    .roadmap-step-label { font-size: 10px; font-weight: 700; margin-bottom: 6px; color: var(--rm-color); }
+    .roadmap-step-content { font-size: 12px; color: #555; line-height: 1.7; white-space: pre-line; }
+    .roadmap-arrow { font-size: 20px; color: #ccc; padding: 0 4px; }
+
+    /* Section title */
+    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .section-sub { font-size: 13px; color: #888; margin-bottom: 24px; }
+
+    /* Hidden panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .phase-panel { display: none; }
+    .phase-panel.active { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-eyebrow">K-Beauty Global Sales · 2026</div>
+      <div class="header-title">비즈니스 영어 학습 계획표</div>
+    </div>
+    <div class="tab-group">
+      <button class="tab-btn active" onclick="switchTab('timeline', this)">학습 단계</button>
+      <button class="tab-btn" onclick="switchTab('resources', this)">자료 출처</button>
+      <button class="tab-btn" onclick="switchTab('routine', this)">일일 루틴</button>
+    </div>
+  </div>
+
+  <!-- Phase selector (only shown in timeline tab) -->
+  <div class="phase-tabs" id="phaseTabs">
+    <button class="phase-btn active" style="--phase-color:#FF6B6B" onclick="switchPhase('prep', this)">D-DAY</button>
+    <button class="phase-btn" style="--phase-color:#4ECDC4" onclick="switchPhase('block1', this)">BLOCK 1</button>
+    <button class="phase-btn" style="--phase-color:#A78BFA" onclick="switchPhase('block2', this)">BLOCK 2</button>
+    <button class="phase-btn" style="--phase-color:#FB923C" onclick="switchPhase('exam', this)">시험</button>
+    <button class="phase-btn" style="--phase-color:#34D399" onclick="switchPhase('block3', this)">BLOCK 3</button>
+  </div>
+</div>
+
+<!-- ══════════ CONTENT ══════════ -->
+<div class="content">
+
+  <!-- ── TIMELINE TAB ── -->
+  <div id="tab-timeline" class="tab-panel active">
+
+    <!-- PHASE: D-DAY -->
+    <div id="phase-prep" class="phase-panel active" style="--phase-color:#FF6B6B">
+      <div class="phase-header" style="--phase-color:#FF6B6B">
+        <div>
+          <div class="phase-label">D-DAY · 6/5 — 6/6</div>
+          <div class="phase-title">자료 수집 세팅</div>
+          <div class="phase-subtitle">오늘 바로 시작</div>
+        </div>
+        <div class="phase-days" style="--phase-color:#FF6B6B">2일</div>
+      </div>
+
+      <div class="accordion">
+        <!-- Block 1 -->
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#FF6B6B" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">📌 채용공고 분석</span>
+            <span class="accordion-icon" style="--block-color:#FF6B6B">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#FF6B6B">
+            <div class="item-card" style="--block-color:#FF6B6B">
+              <div class="item-task">사람인·잡코리아에서 '뷰티 해외영업 신입' 공고 10개 열기</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">사람인 → 해외영업 → 화장품/뷰티 필터</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#FF6B6B">✓ 우대사항 키워드 캡처</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#FF6B6B">
+              <div class="item-task">JD에서 반복되는 단어 정리</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">우대사항 항목만 복사해서 메모장에 모으기</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#FF6B6B">✓ 키워드 리스트 (공부 방향 결정)</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Block 2 -->
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#FF6B6B" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">📦 자료 수집</span>
+            <span class="accordion-icon" style="--block-color:#FF6B6B">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#FF6B6B">
+            <div class="item-card" style="--block-color:#FF6B6B">
+              <div class="item-task">무역 서류 양식 다운로드</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">KOTRA 해외시장뉴스 자료실 / KITA 무역서식 자료실</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#FF6B6B">✓ Offer Sheet, Invoice 양식 저장</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#FF6B6B">
+              <div class="item-task">이메일 샘플 북마크</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">HubSpot 블로그 'sales email templates' / Hunter.io 블로그</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#FF6B6B">✓ 샘플 10개 이상 저장</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#FF6B6B">
+              <div class="item-task">K뷰티 브랜드 영어 사이트 저장</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">COSRX, Anua, Beauty of Joseon 영어 공식사이트 + 아마존 리스팅</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#FF6B6B">✓ 북마크 폴더 정리</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedback-bar">
+        <span class="feedback-label">피드백 루프</span>
+        <span class="feedback-step" style="color:#FF6B6B">직접 쓰기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#FF6B6B">클로드 교정 요청</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#FF6B6B">교정본 분석</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#FF6B6B">표현 암기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#FF6B6B">다시 쓰기</span>
+      </div>
+    </div>
+
+    <!-- PHASE: BLOCK 1 -->
+    <div id="phase-block1" class="phase-panel" style="--phase-color:#4ECDC4">
+      <div class="phase-header" style="--phase-color:#4ECDC4">
+        <div>
+          <div class="phase-label">BLOCK 1 · 6/7 — 6/27</div>
+          <div class="phase-title">비즈니스 이메일 쓰기</div>
+          <div class="phase-subtitle">3주 집중</div>
+        </div>
+        <div class="phase-days" style="--phase-color:#4ECDC4">21일</div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#4ECDC4" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">WEEK 1 — 구조 이해 + 표현 수집 (6/7~6/9)</span>
+            <span class="accordion-icon" style="--block-color:#4ECDC4">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#4ECDC4">
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">이메일 7개 파트 완전 암기</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">Subject / Greeting / Opening / Body / Call to Action / Closing / Signature
+빈칸 만들어서 직접 채워보기</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ 파트 구조 암기 완료</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">샘플 이메일 3개 구조 분석</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">HubSpot에서 Cold Email 샘플 3개 → 각 파트 구분하며 읽기
+① Subject line 전략 ② 첫 문장 방식 ③ CTA 구체성 ④ 전체 길이 체크</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ 분석 노트 작성</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">핵심 표현 20개 수집·암기</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">샘플에서 자주 나오는 표현 추출
+예) 'I hope this email finds you well' / 'Please find attached' / 'I look forward to hearing from you'</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ 표현 노트 20개</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#4ECDC4" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">WEEK 2 — 이메일 5종 작성 (6/10~6/21)</span>
+            <span class="accordion-icon" style="--block-color:#4ECDC4">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#4ECDC4">
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">① Cold Introduction Email (3일: 6/10~6/12)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">6/10: 클로드에게 'K뷰티 브랜드가 미국 편집숍 바이어에게 보내는 Cold Email 샘플 3개' 요청 → 분석
+6/11: 샘플 보지 않고 직접 써보기 (막히면 한국어로)
+6/12: 클로드에게 교정 요청 → 교정본과 비교 → 표현 흡수</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ Cold Email 완성본 1개</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">② Inquiry Reply Email (2일: 6/13~6/14)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">6/13: 샘플 분석 + 직접 쓰기
+6/14: 교정 + 어색한 표현 이유 파악</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ Inquiry Reply 완성본</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">③ Quotation Email (2일: 6/15~6/16)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">6/15: Offer Sheet 항목 보면서 견적 이메일 쓰기
+6/16: 교정 + Incoterms·Payment Terms 표현 정리</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ Quotation Email 완성본</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">④ Follow-up Email (2일: 6/17~6/18)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">6/17: '답장 없는 바이어' 상황 설정 후 작성
+6/18: 교정 + 톤 분석 (너무 공격적이지 않게)</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ Follow-up Email 완성본</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">⑤ Meeting Request / Thank you Email (2일: 6/19~6/21)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">6/19: 화상미팅 요청 이메일 작성
+6/21: 미팅 후 감사 이메일 작성 + 교정</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ Meeting 이메일 완성본</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#4ECDC4" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">WEEK 3 — 이메일 체인 실전 (6/22~6/27)</span>
+            <span class="accordion-icon" style="--block-color:#4ECDC4">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#4ECDC4">
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">실전 이메일 체인 작성</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">시나리오: 미국 편집숍 바이어가 인스타 DM으로 관심 표현
+→ 이메일 전환 → 제품 문의 → 견적 발송 → 팔로업
+전체 흐름을 이메일 5~6통 체인으로 직접 작성</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ 이메일 포트폴리오 #1 완성</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#4ECDC4">
+              <div class="item-task">K뷰티 스킨케어 영어 표현 수집</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">아마존·Sephora에서 관심 브랜드 제품 페이지 읽기
+성분 표현 / 효능 동사 / 타겟 피부 타입 표현 정리
+예) hydrates / brightens / soothes / minimizes pores</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#4ECDC4">✓ 스킨케어 영어 표현 노트 30개</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedback-bar">
+        <span class="feedback-label">피드백 루프</span>
+        <span class="feedback-step" style="color:#4ECDC4">직접 쓰기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#4ECDC4">클로드 교정 요청</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#4ECDC4">교정본 분석</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#4ECDC4">표현 암기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#4ECDC4">다시 쓰기</span>
+      </div>
+    </div>
+
+    <!-- PHASE: BLOCK 2 -->
+    <div id="phase-block2" class="phase-panel" style="--phase-color:#A78BFA">
+      <div class="phase-header" style="--phase-color:#A78BFA">
+        <div>
+          <div class="phase-label">BLOCK 2 · 6/28 — 7/4</div>
+          <div class="phase-title">비즈니스 서류 작성</div>
+          <div class="phase-subtitle">1주 집중</div>
+        </div>
+        <div class="phase-days" style="--phase-color:#A78BFA">7일</div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#A78BFA" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">서류 양식 분석 + 작성</span>
+            <span class="accordion-icon" style="--block-color:#A78BFA">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#A78BFA">
+            <div class="item-card" style="--block-color:#A78BFA">
+              <div class="item-task">Offer Sheet 분석 (6/28~6/29)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">KITA에서 다운받은 양식 열기
+항목별 분석: Incoterms / Payment Terms / Lead Time / Validity / MOQ
+각 항목이 뭘 의미하는지, 어떤 값이 들어가는지 정리</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#A78BFA">✓ 항목별 의미 노트</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#A78BFA">
+              <div class="item-task">Offer Sheet 직접 만들기 (6/30)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">가상 K뷰티 브랜드 설정 → 엑셀로 견적서 양식 직접 제작
+실제 숫자·조건 넣어보기 (FOB Incheon / T/T 30% advance 등)</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#A78BFA">✓ 나만의 Offer Sheet 템플릿</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#A78BFA">
+              <div class="item-task">제품소개서 영어 작성 (7/1~7/2)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">가상 스킨케어 제품 1개 설정
+아마존·Sephora 표현 참고해서 영어로 A4 1장 작성
+포함 항목: 제품명 / 핵심 성분 / 효능 / 타겟 피부 / 용량 / MOQ</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#A78BFA">✓ 영어 제품소개서 완성</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#A78BFA">
+              <div class="item-task">서류 세트 통합 (7/3~7/4)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">이메일(Quotation Email) + Offer Sheet + 제품소개서
+바이어에게 보내는 상황으로 세트 완성 + 클로드 교정</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#A78BFA">✓ 포트폴리오 #2 완성 (서류 세트)</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedback-bar">
+        <span class="feedback-label">피드백 루프</span>
+        <span class="feedback-step" style="color:#A78BFA">직접 쓰기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#A78BFA">클로드 교정 요청</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#A78BFA">교정본 분석</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#A78BFA">표현 암기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#A78BFA">다시 쓰기</span>
+      </div>
+    </div>
+
+    <!-- PHASE: 시험 -->
+    <div id="phase-exam" class="phase-panel" style="--phase-color:#FB923C">
+      <div class="phase-header" style="--phase-color:#FB923C">
+        <div>
+          <div class="phase-label">시험 · 7월</div>
+          <div class="phase-title">국제무역사 집중</div>
+          <div class="phase-subtitle">병행 학습 유지</div>
+        </div>
+        <div class="phase-days" style="--phase-color:#FB923C">30일</div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#FB923C" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">시험 준비 + 연결 학습</span>
+            <span class="accordion-icon" style="--block-color:#FB923C">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#FB923C">
+            <div class="item-card" style="--block-color:#FB923C">
+              <div class="item-task">국제무역사 시험 집중</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">기출문제 풀면서 모르는 용어 나오면 바로 실무 연결
+예) L/C → 이게 실제 Offer Sheet의 Payment Terms에 어떻게 쓰이나 검색</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#FB923C">✓ 국제무역사 합격</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#FB923C">
+              <div class="item-task">업계 정보 수집 루틴 유지 (매일 15분)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">KOTRA 해외시장뉴스 / WWD Korea 스킨케어 관련 기사 1개 읽기
+관심 브랜드(COSRX, 아누아 등) 글로벌 뉴스 스크랩</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#FB923C">✓ 업계 트렌드 노트 누적</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedback-bar">
+        <span class="feedback-label">시험 병행 원칙</span>
+        <span class="feedback-step" style="color:#FB923C">기출 풀기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#FB923C">모르는 용어</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#FB923C">실무 연결 검색</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#FB923C">노트 정리</span>
+      </div>
+    </div>
+
+    <!-- PHASE: BLOCK 3 -->
+    <div id="phase-block3" class="phase-panel" style="--phase-color:#34D399">
+      <div class="phase-header" style="--phase-color:#34D399">
+        <div>
+          <div class="phase-label">BLOCK 3 · 시험 후 — 8월</div>
+          <div class="phase-title">비즈니스 회화</div>
+          <div class="phase-subtitle">2주 집중 → 취업 준비</div>
+        </div>
+        <div class="phase-days" style="--phase-color:#34D399">14일</div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#34D399" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">WEEK 1 — 상황별 스크립트 (시험 후 1주)</span>
+            <span class="accordion-icon" style="--block-color:#34D399">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#34D399">
+            <div class="item-card" style="--block-color:#34D399">
+              <div class="item-task">자기소개 + 브랜드 소개 1분 피칭 (Day 1~2)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">스크립트 직접 작성 → 소리내어 읽기 → 녹음 후 청취
+클로드에게 '바이어 역할로 자기소개 들어줘' 요청 후 롤플레이</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#34D399">✓ 1분 피칭 스크립트 완성</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#34D399">
+              <div class="item-task">제품 피칭 영어 (Day 3~4)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">신제품 제안 상황 설정 → 스크립트 작성
+클로드와 롤플레이: '관심은 있는데 가격이 비싸다'는 바이어 반응 대응 연습</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#34D399">✓ 제품 피칭 스크립트</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#34D399">
+              <div class="item-task">가격·납기 협상 영어 (Day 5~6)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">협상 표현 수집: 'The best I can do is...' / 'If you increase the order quantity...' 등
+가상 협상 롤플레이 3회</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#34D399">✓ 협상 표현 노트 + 롤플레이 녹음</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#34D399">
+              <div class="item-task">클레임 대응 영어 (Day 7)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">납기 지연 / 제품 불량 2가지 시나리오 스크립트 작성
+클로드와 롤플레이 후 교정</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#34D399">✓ 클레임 대응 스크립트</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-card">
+          <button class="accordion-btn" style="--block-color:#34D399" onclick="toggleAccordion(this)">
+            <span class="accordion-btn-title">WEEK 2 — 전체 시뮬레이션 + 취업 준비 (시험 후 2주)</span>
+            <span class="accordion-icon" style="--block-color:#34D399">+</span>
+          </button>
+          <div class="accordion-body" style="--block-color:#34D399">
+            <div class="item-card" style="--block-color:#34D399">
+              <div class="item-task">화상미팅 전체 시뮬레이션 (Day 8~10)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">오프닝 → 브랜드 소개 → 제품 피칭 → 가격 협상 → 클로징
+전체 흐름을 30분짜리 가상 미팅으로 연습
+녹음 → 청취 → 약점 보강</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#34D399">✓ 모의 화상미팅 완성</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#34D399">
+              <div class="item-task">자소서 작성 (Day 11~14)</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">JD 분석한 키워드 기반으로 작성
+지금까지 만든 포트폴리오(이메일, 서류, 시뮬레이션)를 경험으로 구조화
+STAR 기법: 상황→과제→행동→결과</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#34D399">✓ 자소서 초안 완성</div></div>
+              </div>
+            </div>
+            <div class="item-card" style="--block-color:#34D399">
+              <div class="item-task">면접 준비 병행</div>
+              <div class="item-grid">
+                <div><div class="item-label">방법</div><div class="item-how">'해외영업에서 가장 중요한 역량은?' '바이어를 어떻게 발굴하겠습니까?' 단골 질문 30개 정리
+영어 자기소개 + 지원동기 영어로도 준비</div></div>
+                <div><div class="item-label">결과물</div><div class="item-output" style="--block-color:#34D399">✓ 면접 Q&A 스크립트</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feedback-bar">
+        <span class="feedback-label">피드백 루프</span>
+        <span class="feedback-step" style="color:#34D399">스크립트 작성</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#34D399">소리내어 읽기</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#34D399">녹음 청취</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#34D399">롤플레이</span>
+        <span class="feedback-arrow">→</span>
+        <span class="feedback-step" style="color:#34D399">반복</span>
+      </div>
+    </div>
+
+  </div><!-- /tab-timeline -->
+
+  <!-- ── RESOURCES TAB ── -->
+  <div id="tab-resources" class="tab-panel">
+    <div class="section-title">자료 출처 & 활용법</div>
+    <div class="section-sub">샘플 없이 혼자 공부하는 게 가장 힘든 부분 — 여기서 다 해결해요</div>
+
+    <div class="resources-grid">
+      <div class="resource-card" style="--res-color:#4ECDC4">
+        <div class="resource-category">이메일 샘플</div>
+        <div class="resource-item"><div class="resource-name">HubSpot Blog</div><div class="resource-desc">상황별 B2B 이메일 템플릿</div><div class="resource-url">hubspot.com/sales/email-templates 검색</div></div>
+        <div class="resource-item"><div class="resource-name">Hunter.io Blog</div><div class="resource-desc">Cold email 샘플 수십 개</div><div class="resource-url">hunter.io/blog 검색</div></div>
+        <div class="resource-item"><div class="resource-name">Reply.io Blog</div><div class="resource-desc">Cold outreach 특화</div><div class="resource-url">reply.io/blog 검색</div></div>
+      </div>
+      <div class="resource-card" style="--res-color:#A78BFA">
+        <div class="resource-category">무역 서류 양식</div>
+        <div class="resource-item"><div class="resource-name">KOTRA 자료실</div><div class="resource-desc">수출 서류 양식 무료</div><div class="resource-url">kotra.or.kr → 자료실</div></div>
+        <div class="resource-item"><div class="resource-name">KITA 무역서식</div><div class="resource-desc">Offer Sheet, Invoice 양식</div><div class="resource-url">kita.net → 무역서식</div></div>
+        <div class="resource-item"><div class="resource-name">Vertex42</div><div class="resource-desc">영어 비즈니스 서류 엑셀 템플릿</div><div class="resource-url">vertex42.com 검색</div></div>
+      </div>
+      <div class="resource-card" style="--res-color:#FB923C">
+        <div class="resource-category">K뷰티 영어 표현</div>
+        <div class="resource-item"><div class="resource-name">COSRX 영어 공식사이트</div><div class="resource-desc">스킨케어 영어 표현 교과서</div><div class="resource-url">cosrx.com</div></div>
+        <div class="resource-item"><div class="resource-name">아마존 K뷰티 리스팅</div><div class="resource-desc">실제 바이어가 보는 제품 영어</div><div class="resource-url">amazon.com → K-beauty 검색</div></div>
+        <div class="resource-item"><div class="resource-name">Sephora 제품 페이지</div><div class="resource-desc">고급 정제된 뷰티 영어 표현</div><div class="resource-url">sephora.com</div></div>
+      </div>
+      <div class="resource-card" style="--res-color:#34D399">
+        <div class="resource-category">업계 정보</div>
+        <div class="resource-item"><div class="resource-name">KOTRA 해외시장뉴스</div><div class="resource-desc">국가별 시장 정보 무료</div><div class="resource-url">news.kotra.or.kr</div></div>
+        <div class="resource-item"><div class="resource-name">WWD Korea</div><div class="resource-desc">뷰티·패션 업계 뉴스</div><div class="resource-url">wwd.com/korea</div></div>
+        <div class="resource-item"><div class="resource-name">Cosmoprof 유튜브</div><div class="resource-desc">실제 전시회 바이어 상담 영상</div><div class="resource-url">youtube.com → Cosmoprof 검색</div></div>
+      </div>
+    </div>
+
+    <div class="steps-card">
+      <div class="steps-title">📋 자료 분석 → 학습 연결 흐름</div>
+      <div class="steps-grid">
+        <div class="step-card" style="--step-color:#4ECDC4"><div class="step-num">STEP 01</div><div class="step-title-txt">자료 수집</div><div class="step-desc">KOTRA·KITA 서류 양식
+이메일 샘플 북마크
+브랜드 영어 사이트 저장</div></div>
+        <div class="step-card" style="--step-color:#A78BFA"><div class="step-num">STEP 02</div><div class="step-title-txt">자료 분석</div><div class="step-desc">항목별 의미 파악
+표현·용어 노트 정리
+좋은 표현 20개 수집</div></div>
+        <div class="step-card" style="--step-color:#FB923C"><div class="step-num">STEP 03</div><div class="step-title-txt">모방 작성</div><div class="step-desc">보면서 내 버전으로 쓰기
+나중엔 안 보고 쓰기</div></div>
+        <div class="step-card" style="--step-color:#34D399"><div class="step-num">STEP 04</div><div class="step-title-txt">피드백</div><div class="step-desc">클로드에게 교정 요청
+어색한 이유 파악
+표현 다시 노트 정리</div></div>
+        <div class="step-card" style="--step-color:#FF6B6B"><div class="step-num">STEP 05</div><div class="step-title-txt">반복</div><div class="step-desc">같은 상황 자료 없이
+처음부터 다시 쓰기</div></div>
+      </div>
+    </div>
+  </div><!-- /tab-resources -->
+
+  <!-- ── ROUTINE TAB ── -->
+  <div id="tab-routine" class="tab-panel">
+    <div class="section-title">일일 & 주간 루틴</div>
+    <div class="section-sub">매일 1시간 — 구조가 있어야 지속돼요</div>
+
+    <div class="routine-grid">
+      <div class="routine-card" style="--r-color:#4ECDC4">
+        <div class="routine-time">매일 15분</div>
+        <div class="routine-lbl">인풋</div>
+        <div class="routine-content">KOTRA 뉴스 or 브랜드 영어 사이트 읽기</div>
+      </div>
+      <div class="routine-card" style="--r-color:#FB923C">
+        <div class="routine-time">매일 45분</div>
+        <div class="routine-lbl">아웃풋</div>
+        <div class="routine-content">이메일 쓰기 / 서류 작성 / 스크립트 연습</div>
+      </div>
+      <div class="routine-card" style="--r-color:#A78BFA">
+        <div class="routine-time">주 3회</div>
+        <div class="routine-lbl">피드백</div>
+        <div class="routine-content">클로드에게 교정 요청 → 교정본 분석</div>
+      </div>
+      <div class="routine-card" style="--r-color:#34D399">
+        <div class="routine-time">주 1회</div>
+        <div class="routine-lbl">점검</div>
+        <div class="routine-content">이번 주 결과물 확인 + 다음 주 목표 설정</div>
+      </div>
+    </div>
+
+    <div class="warning-card">
+      <div class="warning-title">⚠️ 절대 하지 말아야 할 것</div>
+      <div class="warning-body">
+        샘플 읽고 <em>"이해했다"</em> 하고 넘어가는 것.<br>
+        반드시 <strong>직접 써보고 → 교정받고 → 교정된 표현을 다시 써봐야</strong> 실전에서 나와요.<br>
+        아무리 많이 읽어도 쓰지 않으면 면접·실무에서 안 나옵니다.
+      </div>
+    </div>
+
+    <div class="roadmap-card">
+      <div class="roadmap-title">🗺️ 최종 커리어 로드맵</div>
+      <div class="roadmap-row">
+        <div class="roadmap-step" style="--rm-color:#4ECDC4">
+          <div class="roadmap-step-label">지금~8월</div>
+          <div class="roadmap-step-content">K뷰티 스킨케어
+국내 브랜드
+해외영업 신입</div>
+        </div>
+        <div class="roadmap-arrow">→</div>
+        <div class="roadmap-step" style="--rm-color:#A78BFA">
+          <div class="roadmap-step-label">1~3년차</div>
+          <div class="roadmap-step-content">바이어 관리
+협상·영어
+실전 경험</div>
+        </div>
+        <div class="roadmap-arrow">→</div>
+        <div class="roadmap-step" style="--rm-color:#34D399">
+          <div class="roadmap-step-label">이직 시점</div>
+          <div class="roadmap-step-content">외국계 애슬레저
+or 뷰티 브랜드
+경력직 지원</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-routine -->
+
+</div><!-- /content -->
+
+<script>
+  function switchTab(tabName, btn) {
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update panels
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + tabName).classList.add('active');
+
+    // Show/hide phase tabs
+    document.getElementById('phaseTabs').style.display = tabName === 'timeline' ? 'flex' : 'none';
+  }
+
+  function switchPhase(phaseId, btn) {
+    // Update phase buttons
+    document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update phase panels
+    document.querySelectorAll('.phase-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('phase-' + phaseId).classList.add('active');
+
+    // Close all accordions in new panel
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.accordion-icon').forEach(i => i.textContent = '+');
+    document.querySelectorAll('.accordion-btn').forEach(b => b.classList.remove('open'));
+  }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const icon = btn.querySelector('.accordion-icon');
+    const isOpen = body.classList.contains('open');
+
+    // Close all in same accordion group
+    const siblings = btn.closest('.accordion').querySelectorAll('.accordion-body');
+    const siblingBtns = btn.closest('.accordion').querySelectorAll('.accordion-btn');
+    const siblingIcons = btn.closest('.accordion').querySelectorAll('.accordion-icon');
+    siblings.forEach(s => s.classList.remove('open'));
+    siblingBtns.forEach(b => b.classList.remove('open'));
+    siblingIcons.forEach(i => i.textContent = '+');
+
+    if (!isOpen) {
+      body.classList.add('open');
+      btn.classList.add('open');
+      icon.textContent = '−';
+    }
+  }
+</script>
+</body>
+</html>
